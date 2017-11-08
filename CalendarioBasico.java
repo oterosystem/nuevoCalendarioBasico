@@ -8,18 +8,18 @@
 public class CalendarioBasico
 {
     // Declarando variables dia, mes y año
-    private int dia;
-    private int mes;
-    private int ano;
+    private DisplayDosCaracteres dia;
+    private DisplayDosCaracteres mes;
+    private DisplayDosCaracteres ano;
 
     /**
      * Constructor de la clase CalendarioBasico
      */ 
     public CalendarioBasico()
     {
-        dia = 1;
-        mes = 1;
-        ano = 1;
+        dia = new DisplayDosCaracteres(31) ;
+        mes = new DisplayDosCaracteres(13);
+        ano = new DisplayDosCaracteres(100);
     }
 
     /**
@@ -27,44 +27,33 @@ public class CalendarioBasico
      */
     public void fijarFecha(int nuevoDia, int nuevoMes, int nuevoAnio)
     {
-        dia = nuevoDia;
-        mes = nuevoMes;
-        ano = nuevoAnio;
+        dia.setValorAlmacenado(nuevoDia);
+        mes.setValorAlmacenado(nuevoMes);
+        ano.setValorAlmacenado(nuevoAnio);
     }
 
     /**
      *Metodo para obtener el facha
      */
     public String obtenerFecha()
-    {
-        String textoADevolver = "";
-        String parte1 = dia + "";
-        String parte2 = mes + "";
-        String parte3 = ano + "";
-        if (parte1.length() < 2) {
-            parte1 = "0" + parte1;  
-        }
-        if (mes < 10) {
-            parte2 = "0" + parte2;
-        }
-
-        if (ano < 10) {
-            parte3 = "0" + parte3;
-        }
-        textoADevolver = parte1 + "-" + parte2 + "-" + parte3;
-        return textoADevolver;
+    {   
+        dia.getTextoDelDisplay();
+        mes.getTextoDelDisplay();
+        ano.getTextoDelDisplay();
+        String devolverFecha= dia.getTextoDelDisplay() + "-" + mes.getTextoDelDisplay() + "-" + ano.getTextoDelDisplay();
+        return devolverFecha;
     }
 
     public void avanzarFecha()
-    {
-        dia = dia +1;
-        if(dia == 31){
-            mes = mes + 1;
-            dia = 1;
-            if(mes == 13) {
-                mes = 1;
-                ano = ano + 1;
+    {   
+        dia.incrementaValorAlmacenado();
+
+        if(dia.getValorAlmacenado() ==1){
+            mes.incrementaValorAlmacenado();
+            if(mes.getValorAlmacenado() ==1){
+                ano.incrementaValorAlmacenado();
             }
         }
+
     }
 }
